@@ -1,0 +1,306 @@
+---
+title: Welcome to Middleman
+---
+#fb-root
+:javascript
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/it_IT/sdk.js#xfbml=1&version=v2.3&appId=681356038584784";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+
+
+/ Start Homepage
+#homepage.homepage.section
+  .container
+    .sixteen.columns
+      #fb.fb-page{:style=> " margin-top: 30px;","data-hide-cover" => "false", "data-href" => "https://www.facebook.com/pages/Claudia-Raddi-OOAK-Fairies-Art-Dolls/180193475324218?fref=ts", "data-show-facepile" => "true", "data-show-posts" => "false"}
+        .fb-xfbml-parse-ignore
+          %blockquote{:cite => "https://www.facebook.com/pages/Claudia-Raddi-OOAK-Fairies-Art-Dolls/180193475324218?fref=ts"}
+            %a{:href => "https://www.facebook.com/pages/Claudia-Raddi-OOAK-Fairies-Art-Dolls/180193475324218?fref=ts"} Claudia Raddi  - OOAK Fairies & Art Dolls
+      %form{:action => "https://tinyletter.com/claudiaraddi", :method => "post", :onsubmit => "window.open('https://tinyletter.com/claudiaraddi', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true", :style => "border:1px solid #ccc;padding:3px;text-align:center;", :target => "popupwindow", class: "contactForm", style: "border:0px; margin-top:10px" }
+        .formSecWrap
+          %label{:for => "tlemail"} Newsletter
+        .formSecWrap.formSecWrap2{style: "width: 190px;"}
+          %input#tlemail{:name => "email", :style => "width:160px; font-size: 14px", :type => "text", :placeholder => "Enter your email address"}/
+        .formSecWrap.formSecWrap2
+          %input{:name => "embed", :type => "hidden", :value => "1"}/
+          %input{:type => "submit", :value => "Subscribe"}/
+
+    .slider-text
+      .sixteen.columns
+        .line
+      .twelve.columns
+        #slidecaption
+      .four.columns
+        %a#prevslide.load-item
+          %i.icon-arrow-up
+        %a#nextslide.load-item
+          %i.icon-arrow-down
+/ End homepage
+/ Start Navigation
+%nav
+  .container
+    .sixteen.columns
+      / Start Nav Menu
+      %ul#nav.menu
+        %li
+          %a{:href => "#homepage"} Home
+        %li
+          %a{:href => "#folio"} Portfolio
+        %li
+          %a{:href => "#about"} About
+        %li
+          %a{:href => "#contact"} Contact
+        %li
+          %a{:href => "http://www.ebay.com/usr/claudia-raddi", :target=> :blank } Ebay auctions
+      / End Nav Menu
+      / Start Dropmenu for mobile
+      %select.dropmenu{:name => "dropmenu", :onchange => "moveTo(this.value)"}
+        %option{:selected => "selected", :value => ""} Menu
+        %option{:value => "#homepage"} Home
+        %option{:value => "#folio"} Portfolio
+        %option{:value => "#about"} About
+        %option{:value => "#contact"} Contact
+        %option{:value => "#newsletter"} Newsletter
+
+      / End Dropmenu for mobile
+/ End Navigation
+/ start portfolio
+#folio.page.section
+  .container
+    .sixteen.columns
+      %h1 Portfolio
+      %h3
+        %span.small Those who do
+        %span.smallBold not want to
+        %br/
+        %span.largeBold imitate
+        %span.large anything,
+        %br/
+        %span.medium produce
+        %span.mediumBold nothing.
+        %br/
+        %span.author Salvador Dali
+  .gallerySelector
+    %ul.gallerySelectorList
+      %li.current
+        %a{"data-filter" => "article.portfolio", :href => "#"} All
+      -dato.categories.each do |cat|
+        %li
+          %a{"data-filter" => "article.portfolio[data-category~='#{cat.name}']", :href => "#"}=cat.name
+
+  %section.portfolio_container
+    -dato.items.each do |item|
+      %article.portfolio{"data-category" => item.category.name}
+        %section.thumbImage
+          %img.fullwidth{:alt => "", :src => item.photos[0].photo.url(w: 350 , h: 350)}/
+          .thumbTextWrap
+            .thumbText
+              %h3.sectionTitle=item.name
+              %p=item.description
+              -item.photos.each_with_index do |photo, index|
+                -if index == 0
+                  %a.thumbLink{:href => photo.photo.url(w: 650, h:650), :rel => "prettyPhoto[gallerymulti]"}
+                    %i.icon-search
+                -else
+                  %a{:href => photo.photo.url(w: 650, h:650), :rel => "prettyPhoto[gallerymulti]"}
+
+
+  .portfolioBottom
+/ end portfolio
+/ start parallax 1
+#parallax-1.parallax.fixed{:style => "background-image: url(https://s3.claudiaraddi.net/static/images/parallax/parallax-1.jpg);"}
+  .quoteWrap
+    .quote
+      .container
+        .sixteen.columns
+          %h3
+            %span.large I am not
+            %span.largeBold strange.
+            %br/
+            %span.medium I am just not
+            %span.mediumBold normal.
+            %br/
+            %span.author Salvador Dali
+/ end parallax
+/ start About
+#about.page.section
+  .container.aboutContainer
+    .sixteen.columns
+      %h1
+        About
+        %span Me
+      %h3
+        %span.smallBold Award winning
+        %span.small visual artist
+        %br/
+        %span.mediumBold inspired by
+        %span.medium rich and diverse tecnique,
+        %br/
+        %span.medium  naturally occurring patterns
+        %span.mediumBold and vibrant natural colours.
+        %br/
+
+
+/ end about
+/ start parallax 2
+#parallax-2.parallax.fixed{:style => "background-image: url(https://s3.claudiaraddi.net/static/images/parallax/parallax-2.jpg);"}
+  .quoteWrap
+    .quote
+      .container
+        .sixteen.columns
+          %h3
+            %span.smallBold A true
+            %span.small artist
+            %br/
+            %span.large is not one who
+            %span.largeBold is inspired,
+            %br/
+            %span.medium but one who
+            %span.mediumBold inspires others.
+            %br/
+            %span.author Salvador Dali
+/ end parallax 2
+
+
+/ start contact
+#contact.page.section
+  .container.contactContainer
+    .sixteen.columns
+      %h1
+        Contact
+        %span Me
+      %h3
+        %span.mediumBold Get in
+        %span.medium touch
+        %br/
+        %span.medium let's
+        %span.mediumBold have a chat
+
+    .three.columns.marginTop.contactDetails
+      %ul
+        %li
+          %span.icon-location
+          %a{:href => "#?custom=true&width=500&height=500", :rel => "prettyPhoto"} Google Map
+    .three.columns.marginTop.contactDetails
+      %ul
+        %li
+          %span.icon-envelop>
+          Email:
+          %a{:href => "mailto:claudia.raddi@gmail.com"} claudia.raddi@gmail.com
+
+
+    -# #contact_form
+    -#   .two-thirds.column.marginTop.formWrap
+    -#     = simple_form_for Contact.new, :html => {:class => 'contactForm' }, :remote => true do |f|
+    -#       .formSecWrap
+    -#         = f.input :name, :required => true
+    -#         = f.input :email, :required => true
+    -#         = f.input :subject, :required => true
+    -#       .formSecWrap.formSecWrap2
+    -#         = f.input :message, :as => :text, :required => true
+    -#         %div{:style => "display:none"}= f.input :nickname, :hint => 'Leave this field blank!'
+    -#         %input#submit-form.button{:name => "submit", :type => "submit", :value => "Send Message"}/
+    -#       #success
+
+
+
+
+
+
+
+
+
+
+
+#newsletter.page.section
+  .container.contactContainer
+    .sixteen.columns
+      %h1
+        Follow
+        %span Me
+      %h3
+        %span.mediumBold Subscribe
+        %span.medium to my newsletter
+        %br/
+        %span.medium to be always updated about
+        %span.mediumBold my new creations
+
+    #newsletter-form
+      -# .one-thirds.column.marginTop.formWrap
+      %br
+      %br
+      .sixteen.columns{style: "margin-top:50px"}
+
+        %form{:action => "https://tinyletter.com/claudiaraddi", :method => "post", :onsubmit => "window.open('https://tinyletter.com/claudiaraddi', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true", :style => "border:1px solid #ccc;padding:3px;text-align:center;", :target => "popupwindow", class: "contactForm", style: "border:0px" }
+          .formSecWrap
+            %label{:for => "tlemail"} Enter your email address
+          .formSecWrap.formSecWrap2
+            %input#tlemail{:name => "email", :style => "width:140px", :type => "text"}/
+          %input{:name => "embed", :type => "hidden", :value => "1"}/
+          %input{:type => "submit", :value => "Subscribe"}/
+
+
+
+/ end contact
+/ start parallax 4
+#parallax-4.parallax.fixed{:style => "background-image: url(https://s3.claudiaraddi.net/static/images/parallax/parallax-4.jpg);"}
+  .quoteWrap
+    .quote
+      .container
+        .sixteen.columns
+          %h3
+            %span.largeBold Drawing is the
+            %span.large honesty of the art.
+            %br/
+            %span.medium There is no possibility
+            %span.mediumBold of cheating:
+            %br/
+            %span.large It is either
+            %span.largeBold good or bad.
+            %br/
+            %span.author Salvador Dali
+/ end parallax 4
+/ start footer
+#footer
+  .container
+    / Our Clients
+
+    .sixteen.columns
+      %p.copyright
+        © Claudia Raddi 2015.
+        %br/
+        Web developed by
+        =link_to "Z3N.it", "http://www.z3n.it", :target=>:blank
+/ end footer
+:javascript
+  function moveTo(contentArea){
+    var goPosition = $(contentArea).offset().top;
+    $('html,body').animate({ scrollTop: goPosition}, 'slow');
+  }
+:javascript
+  $('#carouselSlider').flexslider({
+      animation: "slide",
+      animationLoop: true,
+      itemWidth: 236,
+      itemMargin: 0,
+      prevText: "",
+      nextText: "",
+      start: function(slider){
+        $('body').removeClass('loading');
+      }
+      });
+:javascript
+  $(document).ready(function(){
+    $("a[rel^='prettyPhoto']").prettyPhoto({animation_speed:'normal',slideshow:6000});
+    $(".contactDetails a[rel^='prettyPhoto']:first").prettyPhoto({
+    custom_markup: '<div id="map_canvas" style="width:500px; height:500px"></div>',
+    changepicturecallback: function(){ initialize(); }
+    });
+  });
+
+

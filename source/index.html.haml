@@ -97,7 +97,7 @@ title: Welcome to Middleman
     -dato.items.each do |item|
       %article.portfolio{"data-category" => item.category.name}
         %section.thumbImage
-          %img.fullwidth{:alt => "", :src => item.photos[0].photo.url(w: 350 , h: 350)}/
+          %img.fullwidth{:alt => "", :src => item.photos.first.photo.url(w: 350 , h: 350)}/
           .thumbTextWrap
             .thumbText
               %h3.sectionTitle=item.name
@@ -194,28 +194,41 @@ title: Welcome to Middleman
           %a{:href => "mailto:claudia.raddi@gmail.com"} claudia.raddi@gmail.com
 
 
-    -# #contact_form
-    -#   .two-thirds.column.marginTop.formWrap
-    -#     = simple_form_for Contact.new, :html => {:class => 'contactForm' }, :remote => true do |f|
-    -#       .formSecWrap
-    -#         = f.input :name, :required => true
-    -#         = f.input :email, :required => true
-    -#         = f.input :subject, :required => true
-    -#       .formSecWrap.formSecWrap2
-    -#         = f.input :message, :as => :text, :required => true
-    -#         %div{:style => "display:none"}= f.input :nickname, :hint => 'Leave this field blank!'
-    -#         %input#submit-form.button{:name => "submit", :type => "submit", :value => "Send Message"}/
-    -#       #success
+    #contact_form
+      .two-thirds.column.marginTop.formWrap
 
-
-
-
-
-
-
-
-
-
+        %form#new_contact.simple_form.contactForm{"accept-charset" => "UTF-8", :action => "https://formspree.io/claudio.benvenuti@gmail.com", :method => "post"}
+          %input{:name => "utf8", :type => "hidden", :value => "✓"}/
+          .formSecWrap
+            .input.string.required.contact_name
+              %label.string.required{:for => "contact_name"}
+                %abbr{:title => "required"} *
+                Name
+              %input#contact_name.string.required{"aria-required" => "true", :name => "contact[name]", :required => "required", :type => "text"}/
+            .input.email.required.contact_email
+              %label.email.required{:for => "contact_email"}
+                %abbr{:title => "required"} *
+                Email
+              %input#contact_email.string.email.required{"aria-required" => "true", :name => "contact[email]", :required => "required", :type => "email"}/
+            .input.string.required.contact_subject
+              %label.string.required{:for => "contact_subject"}
+                %abbr{:title => "required"} *
+                Subject
+              %input#contact_subject.string.required{"aria-required" => "true", :name => "contact[subject]", :required => "required", :type => "text"}/
+          .formSecWrap.formSecWrap2
+            .input.text.required.contact_message
+              %input{:name => "_gotcha", :style => "display:none", :type => "text"}/
+              %label.text.required{:for => "contact_message"}
+                %abbr{:title => "required"} *
+                Message
+              %textarea#contact_message.text.required{"aria-required" => "true", :name => "contact[message]", :required => "required"}
+            %div{:style => "display:none"}
+              .input.string.optional.contact_nickname.field_with_hint
+                %label.string.optional{:for => "contact_nickname"} Nickname
+                %input#contact_nickname.string.optional{:name => "contact[nickname]", :type => "text"}/
+                %span.hint Leave this field blank!
+            %input#submit-form.button{:name => "submit", :type => "submit", :value => "Send Message"}/
+          #success
 
 #newsletter.page.section
   .container.contactContainer

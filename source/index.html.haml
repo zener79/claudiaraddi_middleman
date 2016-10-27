@@ -95,19 +95,20 @@ title: Welcome to Middleman
 
   %section.portfolio_container
     -dato.items.each do |item|
-      %article.portfolio{"data-category" => item.category.name}
-        %section.thumbImage
-          %img.fullwidth{:alt => "", :src => item.photos.first.photo.url(w: 350 , h: 350)}/
-          .thumbTextWrap
-            .thumbText
-              %h3.sectionTitle=item.name
-              %p=item.description
-              -item.photos.each_with_index do |photo, index|
-                -if index == 0
-                  %a.thumbLink{:href => photo.photo.url(w: 650, h:650), :rel => "prettyPhoto[gallerymulti]"}
-                    %i.icon-search
-                -else
-                  %a{:href => photo.photo.url(w: 650, h:650), :rel => "prettyPhoto[gallerymulti]"}
+      -if item.enabled
+        %article.portfolio{"data-category" => item.category.name}
+          %section.thumbImage
+            %img.fullwidth{:alt => "", :src => item.photos.first.photo.url(w: 350 , h: 350)}/
+            .thumbTextWrap
+              .thumbText
+                %h3.sectionTitle=item.name
+                %p=item.description
+                -item.photos.each_with_index do |photo, index|
+                  -if index == 0
+                    %a.thumbLink{:href => photo.photo.url(w: 650, h:650), :rel => "prettyPhoto[gallerymulti]"}
+                      %i.icon-search
+                  -else
+                    %a{:href => photo.photo.url(w: 650, h:650), :rel => "prettyPhoto[gallerymulti]"}
 
 
   .portfolioBottom
